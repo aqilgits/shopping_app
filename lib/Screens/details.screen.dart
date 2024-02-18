@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shopping_app/Controllers/items.controller.dart';
 import 'package:shopping_app/Models/items.model.dart';
+import 'package:shopping_app/Utils/bottomSheet.util.dart';
 
 class Details extends StatefulWidget {
   const Details({super.key, required this.item});
@@ -210,6 +212,93 @@ class _DetailsState extends State<Details> {
                         ),
                       ),
                       onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Container(
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                ),
+                                color: Colors.white,
+                              ),
+                              height: 200,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
+                                          child: Flex(
+                                              direction: Axis.horizontal,
+                                              children: [
+                                                Expanded(
+                                                  child: Image.network(
+                                                      widget.item.thumbnail),
+                                                ),
+                                              ]),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              widget.item.title,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.05),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            const MyBottomSheetContent(),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.red),
+                                          shape: MaterialStateProperty.all(
+                                            const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(0)),
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          print('added to cart');
+                                        },
+                                        child: const Text(
+                                          'Add to cart',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
                         print('add to cart');
                       },
                       child: const Text(
