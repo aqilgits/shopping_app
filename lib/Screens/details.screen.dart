@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:shopping_app/Controllers/cartSharedPref.controller.dart';
 import 'package:shopping_app/Controllers/items.controller.dart';
+import 'package:shopping_app/Models/cart.model.dart';
 import 'package:shopping_app/Models/items.model.dart';
 import 'package:shopping_app/Utils/bottomSheet.util.dart';
 
 class Details extends StatefulWidget {
-  const Details({super.key, required this.item});
+  const Details({super.key, required this.item, required this.userId});
   final Items item;
+  final String userId;
 
   @override
   State<Details> createState() => _DetailsState();
@@ -15,6 +17,7 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   late PageController _pageController;
   int _currentPage = 0;
+  ItemController itemController = ItemController();
 
   @override
   void initState() {
@@ -55,7 +58,7 @@ class _DetailsState extends State<Details> {
                           Expanded(
                             child: PageView.builder(
                               controller: _pageController,
-                              itemCount: widget.item.image.length,
+                              itemCount: widget.item.images.length,
                               onPageChanged: (int index) {
                                 setState(() {
                                   _currentPage = index;
@@ -63,7 +66,7 @@ class _DetailsState extends State<Details> {
                               },
                               itemBuilder: (BuildContext context, int index) {
                                 return Image.network(
-                                  widget.item.image[index],
+                                  widget.item.images[index],
                                   fit: BoxFit.cover,
                                 );
                               },
@@ -87,7 +90,7 @@ class _DetailsState extends State<Details> {
                                 // crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "RM${calcDiscount(widget.item.price, widget.item.discount)}",
+                                    "RM${itemController.calcDiscount(widget.item.price, widget.item.discountPercentage)}",
                                     style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.width *
@@ -121,7 +124,7 @@ class _DetailsState extends State<Details> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 2),
                                       child: Text(
-                                        "-${widget.item.discount.round().toString()}%",
+                                        "-${widget.item.discountPercentage.round().toString()}%",
                                         style: TextStyle(
                                           color: Colors.red,
                                           fontSize: MediaQuery.of(context)
@@ -284,12 +287,25 @@ class _DetailsState extends State<Details> {
                                             ),
                                           ),
                                         ),
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          print(widget.item.brand);
+                                          final CartSharedPref shoppingCart =
+                                              CartSharedPref();
+                                          await shoppingCart.init('123');
+                                          await shoppingCart.addToCart(
+                                              '123',
+                                              Cart(
+                                                  quantity: 1,
+                                                  user: widget.userId,
+                                                  items: widget.item));
                                           print('added to cart');
+                                          Navigator.pop(context);
                                         },
                                         child: const Text(
                                           'Add to cart',
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 223, 220, 220)),
                                         ),
                                       ),
                                     ),

@@ -3,26 +3,26 @@ class Items {
   final String title;
   final String description;
   final int price;
-  final double discount;
+  final double discountPercentage;
   final dynamic rating;
   final int stock;
   final String brand;
   final String category;
   final String thumbnail;
-  final List<dynamic> image;
+  final List<dynamic> images;
 
   Items(
       {required this.id,
       required this.title,
       required this.description,
       required this.price,
-      required this.discount,
+      required this.discountPercentage,
       required this.rating,
       required this.stock,
       required this.brand,
       required this.category,
       required this.thumbnail,
-      required this.image});
+      required this.images});
 
   factory Items.fromJson(Map<String, dynamic> json) {
     return Items(
@@ -30,13 +30,13 @@ class Items {
         title: json['title'] as String,
         description: json['description'] as String,
         price: json['price'] as int,
-        discount: json['discountPercentage'] as double,
+        discountPercentage: json['discountPercentage'] as double,
         rating: json['rating'] as dynamic,
         stock: json['stock'] as int,
         brand: json['brand'] as String,
         category: json['category'] as String,
         thumbnail: json['thumbnail'] as String,
-        image: json['images'] as List<dynamic>);
+        images: json['images'] as List<dynamic>);
   }
 
   Map<String, dynamic> toJson() => {
@@ -44,12 +44,12 @@ class Items {
         'title': title,
         'description': description,
         'price': price,
-        'discount': discount,
+        'discountPercentage': discountPercentage,
         'rating': rating,
         'stock': stock,
         'brand': brand,
         'category': category,
         'thumbnail': thumbnail,
-        'image': image
+        'images': images
       };
 }
