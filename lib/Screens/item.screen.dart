@@ -50,7 +50,10 @@ class _ItemState extends State<Item> {
                   pageBuilder: (BuildContext context,
                       Animation<double> animation,
                       Animation<double> secondaryAnimation) {
-                    return Details(item: items[index]);
+                    return Details(
+                      item: items[index],
+                      userId: '123',
+                    );
                   },
                   transitionsBuilder: (_, animation, __, child) {
                     return SlideTransition(

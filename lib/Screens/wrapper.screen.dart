@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/Screens/cart.screen.dart';
 import 'package:shopping_app/Screens/item.screen.dart';
 
 class ScreenWrapper extends StatefulWidget {
@@ -27,6 +28,28 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  // transitionDuration: Duration(milliseconds: 500),
+                  pageBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation) {
+                    return const CartScreen(
+                      userId: '123',
+                    );
+                  },
+                  transitionsBuilder: (_, animation, __, child) {
+                    return SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(1.0, 0.0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                ),
+              );
               print('Shopping cart'); // Add your profile icon onTap logic here
             },
           ),
