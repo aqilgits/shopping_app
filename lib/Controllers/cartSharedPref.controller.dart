@@ -21,7 +21,18 @@ class CartSharedPref {
   Future<void> addToCart(String userId, Cart carts) async {
     print('add trigger');
     List<String> cartItems = _prefs.getStringList(userId) ?? [];
-    cartItems.add(jsonEncode(carts.toJson()));
+    int existingIndex = cartItems.indexWhere((item) {
+      Cart cart = Cart.fromJson(jsonDecode(item));
+      return cart.items.id == carts.items.id;
+    });
+    if (existingIndex != -1) {
+      Cart existingCart = Cart.fromJson(jsonDecode(cartItems[existingIndex]));
+      existingCart.quantity += carts.quantity;
+      cartItems[existingIndex] = jsonEncode(existingCart.toJson());
+    } else {
+      cartItems.add(jsonEncode(carts.toJson()));
+    }
+
     await _prefs.setStringList(userId, cartItems);
     print(_prefs.getStringList(userId));
   }
