@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyBottomSheetContent extends StatefulWidget {
-  const MyBottomSheetContent({super.key});
+  const MyBottomSheetContent({super.key, required this.onCounterChanged});
+  final Function(int) onCounterChanged;
 
   @override
   _MyBottomSheetContentState createState() => _MyBottomSheetContentState();
@@ -13,6 +14,7 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+      widget.onCounterChanged(_counter);
     });
   }
 
@@ -24,6 +26,7 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
       } else {
         _counter--;
       }
+      widget.onCounterChanged(_counter);
     });
   }
 

@@ -15,9 +15,16 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  int _counter = 1;
   late PageController _pageController;
   int _currentPage = 0;
   ItemController itemController = ItemController();
+
+  void _handleCounterChanged(int newCounter) {
+    setState(() {
+      _counter = newCounter;
+    });
+  }
 
   @override
   void initState() {
@@ -267,7 +274,10 @@ class _DetailsState extends State<Details> {
                                                           0.05),
                                             ),
                                             const SizedBox(height: 20),
-                                            const MyBottomSheetContent(),
+                                            MyBottomSheetContent(
+                                              onCounterChanged:
+                                                  _handleCounterChanged,
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -295,7 +305,7 @@ class _DetailsState extends State<Details> {
                                           await shoppingCart.addToCart(
                                               '123',
                                               Cart(
-                                                  quantity: 1,
+                                                  quantity: _counter,
                                                   user: widget.userId,
                                                   items: widget.item));
                                           print('added to cart');

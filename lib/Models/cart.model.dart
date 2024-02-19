@@ -2,7 +2,7 @@ import 'package:shopping_app/Models/items.model.dart';
 
 class Cart {
   final String user;
-  final int quantity;
+  int quantity;
   final Items items;
 
   Cart({required this.user, required this.quantity, required this.items});
