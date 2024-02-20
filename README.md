@@ -1,5 +1,5 @@
 # shopping_app
-<img src="[https://example.com/image.png](https://github.com/aqilgits/shopping_app/assets/98644927/53badb8d-e725-4547-9380-174f728e7374)" width="50">
+<img src="https://github.com/aqilgits/shopping_app/assets/98644927/53badb8d-e725-4547-9380-174f728e7374" width="50">
 ![Screenshot_1708443088](https://github.com/aqilgits/shopping_app/assets/98644927/53badb8d-e725-4547-9380-174f728e7374)
 ![Screenshot_1708443082](https://github.com/aqilgits/shopping_app/assets/98644927/83b2c102-e062-4863-8e74-a0da46f930b6){ width=50 }
 ![Screenshot_1708443073](https://github.com/aqilgits/shopping_app/assets/98644927/833e0a51-e6eb-4b90-829c-8d9be9a4bfc7){ width=50 }
