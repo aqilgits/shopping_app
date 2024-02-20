@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/Models/user.model.dart';
 import 'package:shopping_app/Screens/cart.screen.dart';
 import 'package:shopping_app/Screens/item.screen.dart';
-import 'package:shopping_app/Controllers/cartSharedPref.controller.dart';
+import 'package:shopping_app/Screens/profie.screen.dart';
 
 class ScreenWrapper extends StatefulWidget {
-  const ScreenWrapper({super.key});
+  const ScreenWrapper({super.key, required this.user});
+  final User user;
 
   @override
   State<ScreenWrapper> createState() => _ScreenWrapperState();
@@ -22,8 +24,9 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: false,
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       appBar: AppBar(
+        elevation: 0,
         surfaceTintColor: Colors.white,
         actions: [
           IconButton(
@@ -36,8 +39,9 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
                   pageBuilder: (BuildContext context,
                       Animation<double> animation,
                       Animation<double> secondaryAnimation) {
-                    return const CartScreen(
-                      userId: '123',
+                    return CartScreen(
+                      user: widget.user,
+                      userId: widget.user.token,
                     );
                   },
                   transitionsBuilder: (_, animation, __, child) {
@@ -51,7 +55,12 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
                   },
                 ),
               );
-              print('Shopping cart'); // Add your profile icon onTap logic here
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/');
             },
           ),
         ],
@@ -95,7 +104,7 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
       case 1:
         return const Item();
       case 2:
-        return const Item();
+        return ProfileScreen(user: widget.user);
     }
   }
 }

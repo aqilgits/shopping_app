@@ -35,7 +35,7 @@ class CartSharedPref {
     await _prefs.setStringList(userId, cartItems);
   }
 
-  Future<void> AdjustQuantity(String userId, Cart carts) async {
+  Future<void> adjustQuantity(String userId, Cart carts) async {
     print('add trigger');
     List<String> cartItems = _prefs.getStringList(userId) ?? [];
     int existingIndex = cartItems.indexWhere((item) {
