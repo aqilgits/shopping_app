@@ -2,10 +2,12 @@ import 'package:shopping_app/Controllers/cartSharedPref.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/Models/cart.model.dart';
 import 'package:shopping_app/Controllers/items.controller.dart';
+import 'package:shopping_app/Models/user.model.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key, required this.userId});
+  const CartScreen({super.key, required this.userId, required this.user});
   final String userId;
+  final User user;
 
   @override
   State<CartScreen> createState() => _CartState();
@@ -182,7 +184,7 @@ class _CartState extends State<CartScreen> {
                                                   await shoppingCart
                                                       .init('123');
                                                   await shoppingCart
-                                                      .AdjustQuantity(
+                                                      .adjustQuantity(
                                                           '123',
                                                           Cart(
                                                               quantity:
@@ -239,7 +241,7 @@ class _CartState extends State<CartScreen> {
                                                   await shoppingCart
                                                       .init('123');
                                                   await shoppingCart
-                                                      .AdjustQuantity(
+                                                      .adjustQuantity(
                                                           '123',
                                                           Cart(
                                                               quantity:
