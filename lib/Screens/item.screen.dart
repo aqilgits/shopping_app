@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/APIs/items.API.dart';
+import 'package:shopping_app/Models/user.model.dart';
 import 'package:shopping_app/Screens/details.screen.dart';
 import '../Models/items.model.dart';
 
 class Item extends StatefulWidget {
-  const Item({super.key});
+  const Item({super.key, required this.user});
+  final User user;
 
   @override
   State<Item> createState() => _ItemState();
@@ -53,6 +55,7 @@ class _ItemState extends State<Item> {
                     return Details(
                       item: items[index],
                       userId: '123',
+                      user: widget.user,
                     );
                   },
                   transitionsBuilder: (_, animation, __, child) {

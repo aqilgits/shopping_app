@@ -12,13 +12,11 @@ class CartSharedPref {
   }
 
   List<Cart> getCartItem(String userId) {
-    print('get trigger');
     List<String> cartJson = _prefs.getStringList(userId) ?? [];
     return cartJson.map((json) => Cart.fromJson(jsonDecode(json))).toList();
   }
 
   Future<void> addToCart(String userId, Cart carts) async {
-    print('add trigger');
     List<String> cartItems = _prefs.getStringList(userId) ?? [];
     int existingIndex = cartItems.indexWhere((item) {
       Cart cart = Cart.fromJson(jsonDecode(item));

@@ -84,10 +84,10 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Order',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.list),
+          //   label: 'Order',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
@@ -100,10 +100,10 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
   _getBody(int value) {
     switch (value) {
       case 0:
-        return const Item();
+        return Item(user: widget.user);
+      // case 1:
+      //   return const Item();
       case 1:
-        return const Item();
-      case 2:
         return ProfileScreen(user: widget.user);
     }
   }
