@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shopping_app/Controllers/cartSharedPref.controller.dart';
 import 'package:shopping_app/Controllers/items.controller.dart';
 import 'package:shopping_app/Models/cart.model.dart';
@@ -259,26 +260,34 @@ class _DetailsState extends State<Details> {
                                               ]),
                                         ),
                                         const SizedBox(width: 20),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              widget.item.title,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.05),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            MyBottomSheetContent(
-                                              onCounterChanged:
-                                                  _handleCounterChanged,
-                                            ),
-                                          ],
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.7,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                widget.item.title,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.05),
+                                              ),
+                                              const SizedBox(height: 20),
+                                              MyBottomSheetContent(
+                                                onCounterChanged:
+                                                    _handleCounterChanged,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
