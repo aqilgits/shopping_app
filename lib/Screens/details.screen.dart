@@ -4,12 +4,19 @@ import 'package:shopping_app/Controllers/cartSharedPref.controller.dart';
 import 'package:shopping_app/Controllers/items.controller.dart';
 import 'package:shopping_app/Models/cart.model.dart';
 import 'package:shopping_app/Models/items.model.dart';
+import 'package:shopping_app/Models/user.model.dart';
+import 'package:shopping_app/Screens/cart.screen.dart';
 import 'package:shopping_app/Utils/bottomSheet.util.dart';
 
 class Details extends StatefulWidget {
-  const Details({super.key, required this.item, required this.userId});
+  const Details(
+      {super.key,
+      required this.item,
+      required this.userId,
+      required this.user});
   final Items item;
   final String userId;
+  final User user;
 
   @override
   State<Details> createState() => _DetailsState();
@@ -43,6 +50,29 @@ class _DetailsState extends State<Details> {
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  // transitionDuration: Duration(milliseconds: 500),
+                  pageBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation) {
+                    return CartScreen(
+                      user: widget.user,
+                      userId: widget.userId,
+                    );
+                  },
+                  transitionsBuilder: (_, animation, __, child) {
+                    return SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(1.0, 0.0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                ),
+              );
               print('Shopping cart'); // Add your profile icon onTap logic here
             },
           ),
