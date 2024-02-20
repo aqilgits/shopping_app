@@ -14,7 +14,6 @@ class CartSharedPref {
   List<Cart> getCartItem(String userId) {
     print('get trigger');
     List<String> cartJson = _prefs.getStringList(userId) ?? [];
-    print(_prefs.getStringList(userId));
     return cartJson.map((json) => Cart.fromJson(jsonDecode(json))).toList();
   }
 
@@ -34,7 +33,24 @@ class CartSharedPref {
     }
 
     await _prefs.setStringList(userId, cartItems);
-    print(_prefs.getStringList(userId));
+  }
+
+  Future<void> AdjustQuantity(String userId, Cart carts) async {
+    print('add trigger');
+    List<String> cartItems = _prefs.getStringList(userId) ?? [];
+    int existingIndex = cartItems.indexWhere((item) {
+      Cart cart = Cart.fromJson(jsonDecode(item));
+      return cart.items.id == carts.items.id;
+    });
+    if (existingIndex != -1) {
+      Cart existingCart = Cart.fromJson(jsonDecode(cartItems[existingIndex]));
+      existingCart.quantity = carts.quantity;
+      cartItems[existingIndex] = jsonEncode(existingCart.toJson());
+    } else {
+      cartItems.add(jsonEncode(carts.toJson()));
+    }
+
+    await _prefs.setStringList(userId, cartItems);
   }
 
   Future<void> removeFromCart(String userId, Cart carts) async {
